@@ -1,7 +1,6 @@
 package com.adp.application_portal_auth.service;
 
 import com.adp.application_portal_auth.models.*;
-import com.alexharris.web_chat.models.*;
 import com.adp.application_portal_auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,13 +15,14 @@ public class AuthService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
+
     public AuthResponse register(RegisterRequest request){
         var user = User.builder()
-                .first_name(request.getFirst_name())
-                .last_name(request.getLast_name())
+                .first_name(request.getFirstName())
+                .last_name(request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.valueOf("USER"))
+                .role(request.getRole())
                 .build();
         var savedUser = userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);

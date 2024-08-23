@@ -2,6 +2,7 @@ package com.adp.application_portal_auth.service;
 
 import com.adp.application_portal_auth.models.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -19,7 +20,9 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtService {
 
-    private final String SECRET_KEY = "4f77774c6f414c70357864596b4c64374343735338394d767335304535573166";
+    @Value("${env.jwt.secret}")
+    private String SECRET_KEY;
+
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
