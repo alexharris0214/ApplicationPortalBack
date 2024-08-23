@@ -1,6 +1,6 @@
-package com.alexharris.web_chat.repository;
+package com.adp.application_portal_auth.repository;
 
-import com.alexharris.web_chat.models.User;
+import com.adp.application_portal_auth.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

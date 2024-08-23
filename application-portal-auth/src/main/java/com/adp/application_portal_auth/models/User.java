@@ -1,6 +1,5 @@
-package com.alexharris.web_chat.models;
+package com.adp.application_portal_auth.models;
 
-import com.sun.source.doctree.EscapeTree;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

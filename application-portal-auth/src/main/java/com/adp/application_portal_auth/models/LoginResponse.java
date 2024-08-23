@@ -1,4 +1,4 @@
-package com.alexharris.web_chat.models;
+package com.adp.application_portal_auth.models;
 
 import lombok.Data;
 

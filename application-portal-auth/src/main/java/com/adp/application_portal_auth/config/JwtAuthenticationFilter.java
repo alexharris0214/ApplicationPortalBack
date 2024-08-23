@@ -1,7 +1,7 @@
-package com.alexharris.web_chat.config;
+package com.adp.application_portal_auth.config;
 
-import com.alexharris.web_chat.repository.UserRepository;
-import com.alexharris.web_chat.service.JwtService;
+import com.adp.application_portal_auth.repository.UserRepository;
+import com.adp.application_portal_auth.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

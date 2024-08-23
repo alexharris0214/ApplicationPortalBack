@@ -1,9 +1,9 @@
-package com.alexharris.web_chat.controller;
+package com.adp.application_portal_auth.controller;
 
-import com.alexharris.web_chat.models.AuthResponse;
-import com.alexharris.web_chat.models.LoginRequest;
-import com.alexharris.web_chat.models.RegisterRequest;
-import com.alexharris.web_chat.service.AuthService;
+import com.adp.application_portal_auth.models.AuthResponse;
+import com.adp.application_portal_auth.models.LoginRequest;
+import com.adp.application_portal_auth.models.RegisterRequest;
+import com.adp.application_portal_auth.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

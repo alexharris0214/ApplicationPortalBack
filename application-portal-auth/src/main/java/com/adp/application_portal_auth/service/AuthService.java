@@ -1,14 +1,13 @@
-package com.alexharris.web_chat.service;
+package com.adp.application_portal_auth.service;
 
+import com.adp.application_portal_auth.models.*;
 import com.alexharris.web_chat.models.*;
-import com.alexharris.web_chat.repository.UserRepository;
+import com.adp.application_portal_auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor

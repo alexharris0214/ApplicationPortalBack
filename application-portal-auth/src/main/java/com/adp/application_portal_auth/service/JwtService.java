@@ -1,6 +1,6 @@
-package com.alexharris.web_chat.service;
+package com.adp.application_portal_auth.service;
 
-import com.alexharris.web_chat.models.User;
+import com.adp.application_portal_auth.models.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Claims;
