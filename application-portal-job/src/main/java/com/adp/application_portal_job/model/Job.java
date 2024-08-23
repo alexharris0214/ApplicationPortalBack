@@ -22,7 +22,8 @@ public class Job {
     private Date dateListed;
     private Date dateClosed;
     private String jobTitle;
+    private boolean openStatus;
     private String jobDescription;
     private String selectedCandidateId;
-    private boolean open;
+
 }
