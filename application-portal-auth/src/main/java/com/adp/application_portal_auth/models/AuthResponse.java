@@ -10,4 +10,5 @@ import java.util.UUID;
 public class AuthResponse {
     private String userId;
     private String token;
+    private Role role;
 }
