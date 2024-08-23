@@ -5,7 +5,7 @@ import com.adp.application_portal_job.model.Job;
 public interface JobService {
     Job createJob(Job job);
     void deleteJob(String jobId);
-    void updateJob(Job job);
+    Job updateJob(String jobId, Job job);
     void getAllJobsForManager(String managerId);
     void markJobAsComplete(String jobId);
     void selectCandidateForJob(String jobId, String candidateId);
