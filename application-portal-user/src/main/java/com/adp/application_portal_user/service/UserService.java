@@ -10,24 +10,10 @@ import com.adp.application_portal_user.models.User;
 import com.adp.application_portal_user.repository.UserRepository;
 
 @Service
-public class UserService {
-    @Autowired
-    private UserRepository userRepository;
-
-    public User createUser(User user) {
-        return userRepository.save(user);
-    }
-    public Optional<User> getUserById(String id) {
-        return userRepository.findById(id);
-    }
-    public Optional<User> getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-    public void deleteUserById(String id) {
-        userRepository.deleteById(id);
-    }
+public interface UserService {
+    public User createUser(User user);
+    public Optional<User> getUserById(String id);
+    public Optional<User> getUserByEmail(String email);
+    public List<User> getAllUsers();
+    public void deleteUserById(String id);
 }
