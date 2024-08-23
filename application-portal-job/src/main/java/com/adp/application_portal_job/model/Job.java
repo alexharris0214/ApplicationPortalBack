@@ -13,7 +13,7 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collation = "jobs")
+@Document(collection = "jobs")
 public class Job {
     @Id
     private String id;

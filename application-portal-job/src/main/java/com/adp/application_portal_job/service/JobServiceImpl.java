@@ -12,6 +12,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 @NoArgsConstructor
@@ -55,32 +57,84 @@ public class JobServiceImpl implements JobService{
     }
 
     @Override
-    public void getAllJobsForManager(String managerId) {
-
+    public List<Job> getAllJobsForManager(String managerId) {
+        Query getAllJobsForManagerQuery  = new Query(Criteria.where("managerId").is(managerId));
+        return mongoTemplate.find(getAllJobsForManagerQuery, Job.class, "jobs");
     }
 
     @Override
-    public void markJobAsComplete(String jobId) {
+    public List<Job> getAllOpenJobs() {
+        Query getAllOpenJobs = new Query(Criteria.where("openStatus").is(true));
+        return mongoTemplate.find(getAllOpenJobs, Job.class, "jobs");
+    }
 
+    @Override
+    public List<Job> getAllClosedJobs() {
+        Query getAllClosedJobs = new Query(Criteria.where("openStatus").is(false));
+        return mongoTemplate.find(getAllClosedJobs, Job.class, "jobs");
+    }
+
+    @Override
+    public void markJobAsOpen(String jobId) {
+        Query query = new Query(Criteria.where("_id").is(jobId));
+
+        // Create an Update object to set new values
+        Update update = new Update();
+        update.set("open", true);
+
+        mongoTemplate.findAndModify(
+                query,
+                update,
+                Job.class
+        );
+    }
+
+    @Override
+    public void markJobAsClosed(String jobId) {
+        Query query = new Query(Criteria.where("_id").is(jobId));
+
+        // Create an Update object to set new values
+        Update update = new Update();
+        update.set("open", false);
+
+        mongoTemplate.findAndModify(
+                query,
+                update,
+                Job.class
+        );
     }
 
     @Override
     public void selectCandidateForJob(String jobId, String candidateId) {
+        Query query = new Query(Criteria.where("_id").is(jobId));
 
+        // Create an Update object to set new values
+        Update update = new Update();
+        update.set("selectedCandidateId", candidateId);
+
+        mongoTemplate.findAndModify(
+                query,
+                update,
+                Job.class
+        );
     }
 
     @Override
-    public void getJobsCandidateAppliedTo(String candidateId) {
+    public List<Job> getJobsCandidateAppliedTo(String candidateId) {
 
+        return List.of();
     }
 
     @Override
-    public void getJobsCandidateAcceptedTo(String candidateId) {
-
+    public List<Job> getJobsCandidateAcceptedTo(String candidateId) {
+        Query getAllJobsForManagerQuery  = new Query(Criteria.where("selectedCandidateId").is(candidateId));
+        return mongoTemplate.find(getAllJobsForManagerQuery, Job.class, "jobs");
     }
 
     @Override
-    public void getJobsCandidateDeniedTo(String candidateId) {
-
+    public List<Job> getJobsCandidateDeniedTo(String candidateId) {
+        return List.of();
     }
+
+
 }
