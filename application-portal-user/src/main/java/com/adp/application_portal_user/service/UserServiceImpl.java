@@ -3,6 +3,7 @@ package com.adp.application_portal_user.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.adp.application_portal_user.models.UserOther;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,15 +21,19 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User getUserById(String id) {
+    public User getSelf(String userId){
+        return userRepository.findById(userId).orElse(null);
+    }
+    @Override
+    public UserOther getUserById(String id) {
         Optional<User> userOptional = userRepository.findById(id);
-        return userOptional.orElse(null);
+        return userOptional.map(this::buildUserOtherFromUser).orElse(null);
     }
 
     @Override
-    public User getUserByEmail(String email) {
+    public UserOther getUserByEmail(String email) {
         Optional<User> userOptional = userRepository.findByEmail(email);
-        return userOptional.orElse(null);
+        return userOptional.map(this::buildUserOtherFromUser).orElse(null);
     }
 
     @Override
@@ -41,4 +46,14 @@ public class UserServiceImpl implements UserService{
         userRepository.deleteById(id);
     }
 
+    public UserOther buildUserOtherFromUser(User user){
+        return UserOther.builder()
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .phoneNumber(user.getPhoneNumber())
+                .address(user.getAddress())
+                .age(user.getAge())
+                .build();
+    }
 }

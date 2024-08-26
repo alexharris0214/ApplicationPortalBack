@@ -22,9 +22,12 @@ import java.util.UUID;
 public class User implements UserDetails {
     @Id
     private String id;
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private String email;
+    private String phoneNumber;
+    private String address;
+    private int age;
     private String password;
     private Role role;
 
