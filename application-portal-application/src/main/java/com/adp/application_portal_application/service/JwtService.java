@@ -1,14 +1,16 @@
 package com.adp.application_portal_application.service;
 
 import com.adp.application_portal_application.models.User;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,9 +24,9 @@ public class JwtService {
     @Value("${env.jwt.secret}")
     private String SECRET_KEY;
 
-//    public String extractUsername(String token) {
-//        return extractClaim(token, Claims::getSubject);
-//    }
+    public String extractUsername(String token) {
+        return extractClaim(token, Claims::getSubject);
+    }
 
     public String generateToken(
             User userModel
@@ -48,22 +50,22 @@ public class JwtService {
                 .compact();
     }
 
-//    public boolean isTokenValid(String token, UserDetails userDetails){
-//        final String userName = extractUsername(token);
-//        return (userName.equals(userDetails.getUsername()) && !isTokenExpired(token));
-//    }
-//    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver){
-//        final Claims claims = extractAllClaims(token);
-//        return claimsResolver.apply(claims);
-//    }
+    public boolean isTokenValid(String token, User userDetails){
+        final String userName = extractUsername(token);
+        return (userName.equals(userDetails.getId()) && !isTokenExpired(token));
+    }
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver){
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
 
-//    private boolean isTokenExpired(String token){
-//        return extractExpiration(token).before(new Date());
-//    }
+    private boolean isTokenExpired(String token){
+        return extractExpiration(token).before(new Date());
+    }
 
-//    private Date extractExpiration(String token) {
-//        return extractClaim(token, Claims::getExpiration);
-//    }
+    private Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
 
     private Claims extractAllClaims(String token){
         return Jwts

@@ -1,6 +1,7 @@
-package com.adp.application_portal_job.config;
+package com.adp.application_portal_application.config;
 
-import com.adp.application_portal_job.repository.UserRepository;
+import com.adp.application_portal_application.repository.UserRepository;
+import com.adp.application_portal_application.service.ApplicationUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +22,7 @@ public class ApplicationConfig {
     private final UserRepository userRepository;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private ApplicationUserDetailsService userDetailsService;
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
