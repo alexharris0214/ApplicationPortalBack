@@ -25,5 +25,4 @@ public class Job {
     private boolean openStatus;
     private String jobDescription;
     private String selectedCandidateId;
-
 }
