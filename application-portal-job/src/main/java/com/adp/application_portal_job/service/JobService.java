@@ -17,5 +17,4 @@ public interface JobService {
     List<Job> getJobsCandidateAppliedTo(String candidateId);
     List<Job> getJobsCandidateAcceptedTo(String candidateId);
     List<Job> getJobsCandidateDeniedTo(String candidateId);
-
 }
