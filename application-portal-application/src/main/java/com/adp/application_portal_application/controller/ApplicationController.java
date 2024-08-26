@@ -1,8 +1,9 @@
 package com.adp.application_portal_application.controller;
 
 import com.adp.application_portal_application.models.Application;
+import com.adp.application_portal_application.models.requests.DeleteApplicationRequest;
+import com.adp.application_portal_application.models.requests.GetApplicationsForJobRequest;
 import com.adp.application_portal_application.service.ApplicationService;
-import com.adp.application_portal_application.service.ApplicationServiceImpl;
 import com.adp.application_portal_application.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,14 +32,14 @@ public class ApplicationController {
     }
 
     @DeleteMapping("/delete-application")
-    public ResponseEntity<String> deleteApplication(@RequestBody String applicationId){
-        applicationService.deleteApplication(applicationId);
-        return ResponseEntity.ok("Deleted Application with ID: " + applicationId);
+    public ResponseEntity<String> deleteApplication(@RequestBody DeleteApplicationRequest request){
+        applicationService.deleteApplication(request.getApplicationId());
+        return ResponseEntity.ok("Deleted Application with ID: " + request.getApplicationId());
     }
 
     @GetMapping("/get-for-jobs")
-    public ResponseEntity<List<Application>> getApplicationsForJobs(@RequestBody String jobId){
-        List<Application> applications = applicationService.getAllApplicationsForJob(jobId);
+    public ResponseEntity<List<Application>> getApplicationsForJobs(@RequestBody GetApplicationsForJobRequest request){
+        List<Application> applications = applicationService.getAllApplicationsForJob(request.getJobId());
         return ResponseEntity.ok(applications);
     }
 }
