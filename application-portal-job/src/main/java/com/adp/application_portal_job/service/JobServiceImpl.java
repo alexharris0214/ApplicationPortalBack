@@ -30,7 +30,7 @@ public class JobServiceImpl implements JobService{
 
     @Override
     public void deleteJob(String jobId) {
-        jobRepository.deleteBId(jobId);
+        jobRepository.deleteById(jobId);
     }
 
     @Override

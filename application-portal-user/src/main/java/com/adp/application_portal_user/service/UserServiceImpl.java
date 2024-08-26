@@ -16,36 +16,28 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User createUser(User user) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'createUser'");
         return userRepository.save(user);
     }
 
     @Override
-    public Optional<User> getUserById(String id) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'getUserById'");
-        return userRepository.findById(id);
+    public User getUserById(String id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        return userOptional.orElse(null);
     }
 
     @Override
-    public Optional<User> getUserByEmail(String email) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'getUserByEmail'");
-        return userRepository.findByEmail(email);
+    public User getUserByEmail(String email) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+        return userOptional.orElse(null);
     }
 
     @Override
     public List<User> getAllUsers() {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'getAllUsers'");
         return userRepository.findAll();
     }
 
     @Override
     public void deleteUserById(String id) {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'deleteUserById'");
         userRepository.deleteById(id);
     }
 

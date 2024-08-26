@@ -1,7 +1,8 @@
-package com.adp.application_portal_user.config;
+package com.adp.application_portal_job.config;
 
-import com.adp.application_portal_user.repository.UserRepository;
+import com.adp.application_portal_job.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,16 +20,19 @@ public class ApplicationConfig {
 
     private final UserRepository userRepository;
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        return email -> userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-    }
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        return id -> userRepository.findById(id)
+//                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+//    }
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }

@@ -12,8 +12,9 @@ import com.adp.application_portal_user.repository.UserRepository;
 @Service
 public interface UserService {
     public User createUser(User user);
-    public Optional<User> getUserById(String id);
-    public Optional<User> getUserByEmail(String email);
+    public User getUserById(String id);
+    public User getUserByEmail(String email);
     public List<User> getAllUsers();
     public void deleteUserById(String id);
+    public
 }

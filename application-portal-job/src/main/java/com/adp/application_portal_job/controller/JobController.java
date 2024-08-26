@@ -6,10 +6,10 @@ import com.adp.application_portal_job.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.web.header.Header;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("api/jobs")
@@ -33,7 +33,8 @@ public class JobController {
 
     @GetMapping("/manager-jobs")
     public ResponseEntity<List<Job>> getAllJobsForManager(@RequestHeader HttpHeaders headers) {
-        String mangerId = jwtService.extractUsername(headers.getFirst("Authorization"));
+        String token = Objects.requireNonNull(headers.getFirst("Authorization")).substring(7);
+        String mangerId = jwtService.extractUsername(token);
         List<Job> jobsForManager = jobService.getAllJobsForManager(mangerId);
         return ResponseEntity.ok(jobsForManager);
     }

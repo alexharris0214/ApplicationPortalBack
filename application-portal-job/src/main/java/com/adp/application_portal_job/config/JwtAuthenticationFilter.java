@@ -1,7 +1,9 @@
-package com.adp.application_portal_user.config;
+package com.adp.application_portal_job.config;
 
-import com.adp.application_portal_user.repository.UserRepository;
-import com.adp.application_portal_user.service.JwtService;
+import com.adp.application_portal_job.model.User;
+import com.adp.application_portal_job.repository.UserRepository;
+import com.adp.application_portal_job.service.ApplicationUserDetailsService;
+import com.adp.application_portal_job.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,27 +22,27 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter extends OncePerRequestFilter{
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtService jwtService;
     private UserRepository userRepository;
     @Autowired
-    private UserDetailsService userDetailsServiceEmail;
+    private ApplicationUserDetailsService userDetailsService;
 
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
-        final String userEmail;
+        final String userId;
         if(authHeader == null || !authHeader.startsWith("Bearer")){
             filterChain.doFilter(request,response);
             return;
         }
         jwt = authHeader.substring(7);
-        userEmail = jwtService.extractUsername(jwt);
-        if(userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
-            UserDetails userDetails =  this.userDetailsServiceEmail.loadUserByUsername(userEmail);
+        userId = jwtService.extractUsername(jwt);
+        if(userId != null && SecurityContextHolder.getContext().getAuthentication() == null){
+            User userDetails = (User) this.userDetailsService.loadUserByUserId(userId);
             if(jwtService.isTokenValid(jwt, userDetails)){
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
@@ -57,4 +59,3 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 
     }
 }
-

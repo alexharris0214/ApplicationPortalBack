@@ -1,5 +1,4 @@
-package com.adp.application_portal_user.config;
-
+package com.adp.application_portal_job.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -24,13 +23,19 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthFilter;
 
+    private static final String[] WHITE_LIST_URL = {
+            "/api/jobs/open-jobs",
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))  // Enable CORS
                 .authorizeHttpRequests(req ->
-                        req.anyRequest()
-                            .authenticated()
+                        req.requestMatchers(WHITE_LIST_URL)
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
@@ -46,7 +51,6 @@ public class SecurityConfiguration {
         config.setAllowedOrigins(List.of("*")); // Your frontend origin
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
