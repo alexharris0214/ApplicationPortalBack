@@ -16,5 +16,4 @@ public interface UserService {
     public User getUserByEmail(String email);
     public List<User> getAllUsers();
     public void deleteUserById(String id);
-    public
 }
