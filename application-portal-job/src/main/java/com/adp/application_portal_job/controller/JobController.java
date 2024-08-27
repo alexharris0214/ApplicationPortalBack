@@ -1,9 +1,11 @@
 package com.adp.application_portal_job.controller;
 
 import com.adp.application_portal_job.model.Job;
+import com.adp.application_portal_job.model.requests.UpdateJobRequest;
 import com.adp.application_portal_job.service.JobService;
 import com.adp.application_portal_job.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,8 +54,8 @@ public class JobController {
     }
 
     @PatchMapping("/update-job")
-    public ResponseEntity<Job> updateJob(@RequestBody String jobId, Job job) {
-        Job updatedJob = jobService.updateJob(jobId, job);
+    public ResponseEntity<Job> updateJob(@RequestBody UpdateJobRequest request) {
+        Job updatedJob = jobService.updateJob(request.getJobId(), request.getNewJob());
         return ResponseEntity.ok(updatedJob);
     }
 
