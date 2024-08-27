@@ -37,9 +37,9 @@ public class ApplicationController {
         return ResponseEntity.ok("Deleted Application with ID: " + request.getApplicationId());
     }
 
-    @GetMapping("/get-for-jobs")
-    public ResponseEntity<List<Application>> getApplicationsForJobs(@RequestBody GetApplicationsForJobRequest request){
-        List<Application> applications = applicationService.getAllApplicationsForJob(request.getJobId());
+    @GetMapping("/get-for-job/{jobId}")
+    public ResponseEntity<List<Application>> getApplicationsForJobs(@PathVariable String jobId){
+        List<Application> applications = applicationService.getAllApplicationsForJob(jobId);
         return ResponseEntity.ok(applications);
     }
 }
