@@ -1,6 +1,8 @@
 package com.adp.application_portal_job.controller;
 
 import com.adp.application_portal_job.model.Job;
+import com.adp.application_portal_job.model.requests.JobIdRequest;
+import com.adp.application_portal_job.model.requests.SelectCandidateRequest;
 import com.adp.application_portal_job.model.requests.UpdateJobRequest;
 import com.adp.application_portal_job.service.JobService;
 import com.adp.application_portal_job.service.JwtService;
@@ -48,9 +50,9 @@ public class JobController {
     }
 
     @DeleteMapping("/delete-job")
-    public ResponseEntity<String> deleteJob(@RequestBody String jobId) {
-        jobService.deleteJob(jobId);
-        return ResponseEntity.ok("Successfully Deleted Job with JobID: " + jobId);
+    public ResponseEntity<String> deleteJob(@RequestBody JobIdRequest jobIdRequest) {
+        jobService.deleteJob(jobIdRequest.getJobId());
+        return ResponseEntity.ok("Successfully Deleted Job with JobID: " + jobIdRequest.getJobId());
     }
 
     @PutMapping("/update-job")
@@ -60,20 +62,20 @@ public class JobController {
     }
 
     @PatchMapping("/job-open")
-    public ResponseEntity<String> markJobAsOpen(@RequestBody String jobId) {
-        jobService.markJobAsOpen(jobId);
-        return ResponseEntity.ok("Marked Job with ID: " + jobId + " as open");
+    public ResponseEntity<String> markJobAsOpen(@RequestBody JobIdRequest jobIdRequest) {
+        jobService.markJobAsOpen(jobIdRequest.getJobId());
+        return ResponseEntity.ok("Marked Job with ID: " + jobIdRequest.getJobId() + " as open");
     }
 
     @PatchMapping("job-closed")
-    public ResponseEntity<String> markJobAsClosed(@RequestBody String jobId) {
-        jobService.markJobAsClosed(jobId);
-        return ResponseEntity.ok("Marked Job with ID: " + jobId + " as closed");
+    public ResponseEntity<String> markJobAsClosed(@RequestBody JobIdRequest jobIdRequest) {
+        jobService.markJobAsClosed(jobIdRequest.getJobId());
+        return ResponseEntity.ok("Marked Job with ID: " + jobIdRequest.getJobId() + " as closed");
     }
 
     @PatchMapping("select-candidate")
-    public ResponseEntity<String> selectCandidate(@RequestBody String jobId, String candidateId) {
-        jobService.selectCandidateForJob(jobId, candidateId);
-        return ResponseEntity.ok("Marked Job with ID: " + jobId + " as open");
+    public ResponseEntity<String> selectCandidate(@RequestBody SelectCandidateRequest selectCandidateRequest) {
+        jobService.selectCandidateForJob(selectCandidateRequest.getJobId(), selectCandidateRequest.getCandidateId());
+        return ResponseEntity.ok("Marked Job with ID: " + selectCandidateRequest.getJobId() + " as closed with Candidate ID:" + selectCandidateRequest.getCandidateId());
     }
 }
