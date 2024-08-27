@@ -53,7 +53,7 @@ public class JobController {
         return ResponseEntity.ok("Successfully Deleted Job with JobID: " + jobId);
     }
 
-    @PatchMapping("/update-job")
+    @PutMapping("/update-job")
     public ResponseEntity<Job> updateJob(@RequestBody UpdateJobRequest request) {
         Job updatedJob = jobService.updateJob(request.getJobId(), request.getNewJob());
         return ResponseEntity.ok(updatedJob);
