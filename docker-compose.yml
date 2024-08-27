@@ -1,0 +1,49 @@
+services:
+  auth-service:
+    build:
+      context: ./application-portal-auth
+    ports:
+      - "8080:8080"
+    container_name: auth-service
+    networks:
+      - app-network
+
+  job-service:
+    build:
+      context: ./application-portal-job
+    ports:
+      - "8081:8081"
+    container_name: job-service
+    networks:
+      - app-network
+
+  application-service:
+    build:
+      context: ./application-portal-application
+    ports:
+      - "8082:8082"
+    container_name: application-service
+    networks:
+      - app-network
+
+  resume-service:
+    build:
+      context: ./application-portal-resume
+    ports:
+      - "8083:8083"
+    container_name: resume-service
+    networks:
+      - app-network
+
+  user-service:
+    build:
+      context: ./application-portal-user
+    ports:
+      - "8084:8084"
+    container_name: user-service
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

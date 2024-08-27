@@ -1,22 +1,14 @@
-FROM gradle:jdk21-alpine as builder
-
-WORKDIR /app
-
-COPY gradle /app/gradle
-COPY gradlew /app/gradlew
-COPY build.gradle /app/
-COPY settings.gradle /app/
-
-COPY src /app/src
-
-RUN ./gradlew build 
-
+# Use a base image with JDK 21
 FROM eclipse-temurin:21-jdk-alpine
 
+# Set the working directory inside the container
 WORKDIR /app
 
-COPY --from=builder /app/build/libs/*.jar app.jar
+# Copy the built JAR file to the container
+COPY build/libs/application-portal-auth-0.0.1-SNAPSHOT.jar app.jar
 
+# Expose the port that the service will run on (replace with the correct port for each service)
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Run the JAR file
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
