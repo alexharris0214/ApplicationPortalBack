@@ -65,7 +65,6 @@ public class JobServiceImplTest {
         newJob.setListingTitle("New Title");
         newJob.setDateListed(new Date());
         newJob.setDateClosed(new Date());
-        newJob.setJobTitle("Engineer");
         newJob.setJobDescription("New Description");
         newJob.setSelectedCandidateId("candidate123");
         newJob.setOpenStatus(true);
