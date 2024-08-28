@@ -21,6 +21,10 @@ public class Job {
     private String listingTitle;
     private Date dateListed;
     private Date dateClosed;
+//    private String state;
+//    private String city;
+    private String department;
+
     private String jobTitle;
     private boolean openStatus;
     private String jobDescription;
