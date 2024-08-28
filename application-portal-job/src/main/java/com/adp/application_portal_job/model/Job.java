@@ -23,8 +23,8 @@ public class Job {
     private Date dateClosed;
     private String state;
     private String city;
-    private String positionCategory;
-    private Position jobTitle;
+    private Position positionCategory;
+    private String jobTitle;
     private boolean openStatus;
     private String jobDescription;
     private String selectedCandidateId;
