@@ -86,7 +86,7 @@ public class JobServiceImpl implements JobService{
 
         // Create an Update object to set new values
         Update update = new Update();
-        update.set("open", true);
+        update.set("openStatus", true);
 
         mongoTemplate.findAndModify(
                 query,
@@ -101,7 +101,7 @@ public class JobServiceImpl implements JobService{
 
         // Create an Update object to set new values
         Update update = new Update();
-        update.set("open", false);
+        update.set("openStatus", false);
 
         mongoTemplate.findAndModify(
                 query,
