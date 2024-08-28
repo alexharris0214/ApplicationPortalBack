@@ -49,4 +49,10 @@ public class ApplicationServiceImpl implements ApplicationService{
         Query findApplicationsForJobQuery = new Query(Criteria.where("jobId").is(jobId));
         return mongoTemplate.find(findApplicationsForJobQuery, Application.class);
     }
+
+    @Override
+    public List<Application> getAllApplicationsForCandidate(String candidateId) {
+        Query findApplicationsForCandidateQuery = new Query(Criteria.where("userId").is(candidateId));
+        return mongoTemplate.find(findApplicationsForCandidateQuery, Application.class);
+    }
 }

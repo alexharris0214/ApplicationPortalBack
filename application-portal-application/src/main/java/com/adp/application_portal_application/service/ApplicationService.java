@@ -9,4 +9,5 @@ public interface ApplicationService {
     Application updateApplication(String applicationId, Application updatedApplication);
     void deleteApplication(String applicationId);
     List<Application> getAllApplicationsForJob(String jobId);
+    List<Application> getAllApplicationsForCandidate(String candidateId);
 }
