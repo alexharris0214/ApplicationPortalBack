@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -23,6 +24,11 @@ public class JobServiceImpl implements JobService{
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    @Override
+    public Job getJob(String jobId){
+        Optional<Job> jobOptional = jobRepository.findJobById(jobId);
+        return jobOptional.orElse(null);
+    }
     @Override
     public Job createJob(Job job) {
         return jobRepository.save(job);
@@ -121,7 +127,6 @@ public class JobServiceImpl implements JobService{
 
     @Override
     public List<Job> getJobsCandidateAppliedTo(String candidateId) {
-
         return List.of();
     }
 
