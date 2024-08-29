@@ -42,4 +42,11 @@ public class ApplicationController {
         List<Application> applications = applicationService.getAllApplicationsForJob(jobId);
         return ResponseEntity.ok(applications);
     }
+
+    @GetMapping("/get-for-candidate/{candidateId}")
+    public ResponseEntity<List<Application>> getApplicationsForCandidate(@PathVariable String candidateId){
+        List<Application> applications = applicationService.getAllApplicationsForCandidate(candidateId);
+        return ResponseEntity.ok(applications);
+    }
+
 }

@@ -21,9 +21,12 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     private String id;
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private String email;
+    private int age;
+    private String address;
+    private String phoneNumber;
     private String password;
     private Role role;
 

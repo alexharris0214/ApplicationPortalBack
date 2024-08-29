@@ -5,6 +5,7 @@ import com.adp.application_portal_job.model.Job;
 import java.util.List;
 
 public interface JobService {
+    Job getJob(String jobId);
     Job createJob(Job job);
     void deleteJob(String jobId);
     Job updateJob(String jobId, Job job);

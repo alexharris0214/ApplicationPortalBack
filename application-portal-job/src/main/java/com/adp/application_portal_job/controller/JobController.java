@@ -29,6 +29,12 @@ public class JobController {
         return ResponseEntity.ok(jobsOpen);
     }
 
+    @GetMapping("/{jobId}")
+    public ResponseEntity<Job> getJob(@PathVariable String jobId){
+        Job job = jobService.getJob(jobId);
+        return ResponseEntity.ok(job);
+    }
+
     @GetMapping("/closed-jobs")
     public ResponseEntity<List<Job>> getAllClosedJobs(@RequestHeader HttpHeaders headers) {
         List<Job> jobsClosed = jobService.getAllClosedJobs();
@@ -77,5 +83,11 @@ public class JobController {
     public ResponseEntity<String> selectCandidate(@RequestBody SelectCandidateRequest selectCandidateRequest) {
         jobService.selectCandidateForJob(selectCandidateRequest.getJobId(), selectCandidateRequest.getCandidateId());
         return ResponseEntity.ok("Marked Job with ID: " + selectCandidateRequest.getJobId() + " as closed with Candidate ID:" + selectCandidateRequest.getCandidateId());
+    }
+
+    @GetMapping("/get-jobs-applied/{candidateId}")
+    public ResponseEntity<List<Job>> getJobsAppliedTo(@PathVariable String candidateId){
+        List<Job> jobs = jobService.getJobsCandidateAppliedTo(candidateId);
+        return ResponseEntity.ok(jobs);
     }
 }
